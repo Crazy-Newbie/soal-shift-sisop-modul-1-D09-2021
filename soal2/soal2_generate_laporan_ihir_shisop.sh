@@ -23,6 +23,10 @@ export LC_ALL=C
 awk '
 BEGIN{FS="\t"}
 {
-	if($2)
+	if($2~"2017" && ($10=="Albuquerque"))
+	{
+		Customername[$7]++
+	}
 }
-
+END {
+printf
