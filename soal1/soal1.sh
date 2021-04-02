@@ -1,5 +1,17 @@
 #!/bin/bash
 
+#1a
+grep -o "[I|E].*" syslog.log
+
+#1b
+grep -o "ERROR.*" syslog.log | cut -d "(" -f1 | sort | uniq -c
+
+#1c
+grep -o "ERROR.*" syslog.log | cut -d "(" -f2 | cut -d ")" -f1 | sort | uniq -c
+grep -o "INFO.*" syslog.log | cut -d "(" -f2 | cut -d ")" -f1 | sort | uniq -c
+
+
+#1d
 modif=$(grep "modified" syslog.log | wc -l)
 echo "The ticket was modified while updating," $modif > error_message.txt
 deny=$(grep "denied" syslog.log | wc -l)
@@ -15,6 +27,7 @@ echo "Connection to DB failed," $connection >> error_message.txt
 
 sort -t, -nr -k2 error_message.txt | sed '1i\Count,Error' > error_message.csv
 
+#1e
 echo "Username,INFO,ERROR" > user_statistic.csv
 cut -d "(" -f2 syslog.log | cut -d ")" -f1 | sort | uniq |
 while read line;
