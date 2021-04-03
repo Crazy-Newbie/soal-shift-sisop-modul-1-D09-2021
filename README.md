@@ -9,3 +9,10 @@ laporan **penggunaan user** pada aplikasi *ticky*. Perlu diketahui bahwa pengerj
 Ryujin diminta untuk mengumpulkan informasi dari log aplikasi yang terdapat pada file **syslog.log**. 
 Informasi yang diperlukan antara lain: jenis log(ERROR/INFO), pesan log, dan username pada setiap baris lognya.
 Untuk mempermudah pekerjaan tersebut, di soal ini disuruh untuk membantu membuat Regex yang dapat mengambil informasi tersebut.
+
+```
+grep -o "[I|E].*" syslog.log
+```
+
+Untuk mengambil informasi tersebut digunakanlah command `grep` agar dapat mengambil kalimat tersebut di setiap linenya. 
+Di command `grep` yang dipakai terdapat `-o`, command ini gunanya untuk memfilter kata yang mengandung string tersebut akan di grep
