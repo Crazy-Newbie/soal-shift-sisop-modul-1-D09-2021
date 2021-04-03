@@ -15,4 +15,6 @@ grep -o "[I|E].*" syslog.log
 ```
 
 Untuk mengambil informasi tersebut digunakanlah command `grep` agar dapat mengambil kalimat tersebut di setiap linenya. 
-Di command `grep` yang dipakai terdapat `-o`, command ini gunanya untuk memfilter kata yang mengandung string tersebut akan di grep
+Di command `grep` yang dipakai terdapat `-o`, command ini gunanya untuk memfilter kata yang mengandung string tersebut akan di grep.
+Untuk informasi yang di tampilkan adalah jenis log(ERROR/INFO) yang terdapat pada `system.log`, maka dari itu untuk mengambil
+kalimat tersebut, diambil kalimat yang mengandung huruf kapital "I" atau "E" maka dari itu setiap grep yang akan dilakukan
