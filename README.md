@@ -131,7 +131,14 @@ done >> user_statistic.csv
 ```
 
 Diawali dengan pemasukan header dengan menggunakan `echo "Username,INFO,ERROR" > user_statistic.csv`. Setelah itu, seperti pada nomor 1c dilakukan command cut
-yang dimana untuk mengambil username. 
+yang dimana untuk mengambil username. Setelah itu dilakukan do While dan membuat variabel untuk menghitung setiap "ERROR" dan "INFO" yang ada pada setiap user.
+
+`while read line` ketika line tersebut di read maka membuat dua variabel yaitu `err` dan `inf` untuk menghitung "ERROR" dan "INFO" tersebut. Menggunakan command
+`grep -o` dan di filter dengan `-o` yang mengandung kata tersebut, setelah itu di hitung dengan `wc -l` dan hasil tersebut di print ke dalam file `user_statistic.csv`
+
+Hasil Output :
+
+![alt text](https://github.com/Crazy-Newbie/soal-shift-sisop-modul-1-D09-2021/blob/main/Screenshot/output%201e.jpg)
 
 
 
