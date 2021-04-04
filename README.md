@@ -69,7 +69,7 @@ Untuk "ERROR" :
 Untuk "INFO" :
 ![alt text](https://github.com/Crazy-Newbie/soal-shift-sisop-modul-1-D09-2021/blob/main/Screenshot/output%201cc.jpg)
 
-# soal 1d
+# 1d
 Ryujin diminta untuk memindahkan data pada poin b ke file `.csv` yang dinamakan dengan `error_message.csv` dengan Header "Error, Count"
 dan diurutkan dari kemunculan yang paling banyak
 
