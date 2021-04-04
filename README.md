@@ -115,6 +115,26 @@ Hasil Output :
 ![alt text](https://github.com/Crazy-Newbie/soal-shift-sisop-modul-1-D09-2021/blob/main/Screenshot/output%201d.jpg)
 
 
+# 1e
+Ryujin diminta untuk memindahkan data yang ada di poin C untuk di pindahkan ke dalam `.csv` yang dinamai `user_statistic.csv` dengan Header "Usernam,INFO,ERROR" dan diurutkan 
+secara *ascending*.
+
+```
+echo "Username,INFO,ERROR" > user_statistic.csv
+cut -d "(" -f2 syslog.log | cut -d ")" -f1 | sort | uniq |
+while read line;
+do
+	err=$(grep -o "ERROR.*($line)" syslog.log | wc -l)
+	inf=$(grep -o "INFO.*($line)" syslog.log | wc -l)
+	echo -e "$line,$inf,$err"
+done >> user_statistic.csv
+```
+
+Diawali dengan pemasukan header dengan menggunakan `echo "Username,INFO,ERROR" > user_statistic.csv`. Setelah itu, seperti pada nomor 1c dilakukan command cut
+yang dimana untuk mengambil username. 
+
+
+
 # Soal 2
 Soal ini meminta peserta untuk melkakukan pengolahan data terhadap file yang telah diberikan yakni *Laporan-TokoShiSop.tsv*. Di antara lain adalah mencari **profit percentage terbesar**, mencari **nama customer pada transaksi tahun 2017 di Albuquerque**, dan selainnya.
 
