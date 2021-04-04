@@ -17,7 +17,53 @@ grep -o "[I|E].*" syslog.log
 Untuk mengambil informasi tersebut digunakanlah command `grep` agar dapat mengambil kalimat tersebut di setiap linenya. 
 Di command `grep` yang dipakai terdapat `-o`, command ini gunanya untuk memfilter kata yang mengandung string tersebut akan di grep.
 Untuk informasi yang di tampilkan adalah jenis log(ERROR/INFO) yang terdapat pada `system.log`, maka dari itu untuk mengambil
-kalimat tersebut, diambil kalimat yang mengandung huruf kapital "I" atau "E" maka dari itu setiap grep yang akan dilakukan
+kalimat tersebut, diambil kalimat yang mengandung huruf kapital "I" atau "E" maka dari itu setiap grep yang akan dilakukan akan mencari
+String yang mengandung huruf kapital "I" atau "E" dan disitulah informasi akan didapatkan.
+
+Karena kemunculan dari pesan tersebut tidak hanya kata-kata ERROR dan INFO saja, digunakan `.*` untuk mengambil semua konten yang ada setelah
+kata ERROR dan INFO tersebut dan hal tersebut akan di print.
+
+Hasil dari Output :
+
+![alt text](https://github.com/Crazy-Newbie/soal-shift-sisop-modul-1-D09-2021/blob/main/Screenshot/output%201a.jpg)
+
+# 1b
+Ryujin harus menampilkan pesan ERROR yang ada dan memunculkan berapa banyak pesan tersebut muncul.
+
+```
+grep -o "ERROR.*" syslog.log | cut -d "(" -f1 | sort | uniq -c
+```
+
+Untuk melakukan hal tersebut digunakan command `grep -o` seperti di nomor 1a yang diatas, dan karena yang diminta hanya pesan ERROR maka yang akan diambil stringnya
+adalah "ERROR.*". Hal tersebut hanya mengambil kata-kata error yang ada dan akan print konten setelahnya karena ada `.*` di setelah kata "ERORR" tersebut. 
+
+Dikarenakan username tidak diperlukan maka digunakanlah `cut -d "(" -f1`. Command ini digunakan untuk mengambil karakter yang di case ini adalah sebelum tanda "(".
+Dengan adanya delimiter "-d", command cut akan dilakukan jika delimiter itu di field yang ditentukan dalam case ini sebelum *delimiter* di *field 1* maka,
+digunakan `-f1`, agar hanya mengambil kalimat sebelum "(".
+
+Setelah itu, dilakukan `sort` dan dilanjuti dengan `uniq -c`, dilakukannya `sort` ini agar bisa menggunakan `uniq`. `uniq` ini agar mengambil pesan error yang ada
+dan tidak akan terulangi karena kalimat yang diambil tersebut dianggap unik dan tidak bisa diulang, untuk menghitung kalimat tersebut digunakan `-c` 
+dan jumlah yang muncul akan ditampilkan.
+
+Hasil dari Output : 
+
+![alt text](https://github.com/Crazy-Newbie/soal-shift-sisop-modul-1-D09-2021/blob/main/Screenshot/output%201b.jpg)
+
+# 1c
+Ryujin harus menampilkan hasil kemunculan log ERROR dan INFO untuk setiap *user*-nya
+
+```
+grep -o "ERROR.*" syslog.log | cut -d "(" -f2 | cut -d ")" -f1 | sort | uniq -c
+grep -o "INFO.*" syslog.log | cut -d "(" -f2 | cut -d ")" -f1 | sort | uniq -c
+```
+
+Kurang lebih sama seperti nomor 2 yang dimana yang di grep merupakan "ERROR" dan "INFO". Tetapi dalam hal ini, yang diminta adalah jumlah kemunculan dari
+"ERROR" dan "INFO" di setiap *user*-nya. Oleh karena itu digunakan `cut -d "(" -f2` dan `cut -d ")" -f1`, command ini digunakan hanya untuk mengambil kalimat
+yang terdapat di setelah tanda "(" dan sebelum ")" oleh karena itu, untuk setelah "(" digunakan `-f2` dan untuk ")" digunakan `f1`.
+
+Hasil Output :
+
+![alt text](https://github.com/Crazy-Newbie/soal-shift-sisop-modul-1-D09-2021/blob/main/Screenshot/output%201c.jpg)
 
 # Soal 2
 Soal ini meminta peserta untuk melkakukan pengolahan data terhadap file yang telah diberikan yakni *Laporan-TokoShiSop.tsv*. Di antara lain adalah mencari **profit percentage terbesar**, mencari **nama customer pada transaksi tahun 2017 di Albuquerque**, dan selainnya.
