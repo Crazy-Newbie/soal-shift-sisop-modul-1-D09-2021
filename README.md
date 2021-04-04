@@ -63,7 +63,57 @@ yang terdapat di setelah tanda "(" dan sebelum ")" oleh karena itu, untuk setela
 
 Hasil Output :
 
+Untuk "ERROR" :
 ![alt text](https://github.com/Crazy-Newbie/soal-shift-sisop-modul-1-D09-2021/blob/main/Screenshot/output%201c.jpg)
+
+Untuk "INFO" :
+![alt text](https://github.com/Crazy-Newbie/soal-shift-sisop-modul-1-D09-2021/blob/main/Screenshot/output%201cc.jpg)
+
+# soal 1d
+Ryujin diminta untuk memindahkan data pada poin b ke file `.csv` yang dinamakan dengan `error_message.csv` dengan Header "Error, Count"
+dan diurutkan dari kemunculan yang paling banyak
+
+```
+modif=$(grep "modified" syslog.log | wc -l)
+echo "The ticket was modified while updating," $modif > error_message.txt
+deny=$(grep "denied" syslog.log | wc -l)
+echo "Permission denied while closing ticket," $deny >> error_message.txt
+tried=$(grep "Tried" syslog.log | wc -l)
+echo "Tried to add information to closed ticket," $tried >> error_message.txt
+timeout=$(grep "Timeout" syslog.log | wc -l)
+echo "Timeout while retrieving information," $timeout >> error_message.txt
+notexist=$(grep "exist" syslog.log | wc -l)
+echo "Ticket doesn't exist," $notexist >> error_message.txt
+connection=$(grep "Connection" syslog.log | wc -l)
+echo "Connection to DB failed," $connection >> error_message.txt
+
+sort -t, -nr -k2 error_message.txt | sed '1i\Count,Error' > error_message.csv
+```
+Untuk hal tersebut digunakan beberapa variabel yang dapat membedakan. Diberi salah satu variabel misalnya : 
+
+```
+timeout=$(grep "Timeout" syslog.log | wc -l)
+echo "Timeout while retrieving information," $timeout >> error_message.txt
+```
+
+Variabel tersebut melakukan command `grep` yang dimana kalimat yang mengandung kata "Timeout" akan diambil dan untuk menghitung kalimat yang mengandung
+kata tersebut digunakan `wc -l` yang dimana command ini akan menghitung berapa banyak kalimat yang mengandung kata tersebut.
+Setelah itu hasil tersebut akan di *print* dan di setor ke dalam *file temporary.txt* yang diberi nama "error_message.txt"
+
+```
+sort -t, -nr -k2 error_message.txt | sed '1i\Count,Error' > error_message.csv
+```
+Di dalam file tersebut akan di *sort* dengan separator "," dengan menggunakan `-t,` dan diurutkan secara *decending* yang di mana command yang digunakan adalah
+`-nr` dan yang di urutkan berada di kolom ke dua maka dari itu digunakan `-k2`. Karena diminta Header yang berisikan "Error, Count", maka digunakan `sed 'li\Count,Error'`. 
+command `sed` merupakan *stream editor* yang dimana command ini akan mengedit file yang dituju, untuk case ini sebelum menambahkan semua informasi yang didapat
+dimasukkan sebuah Header maka dari itu dimasukkan "Count,Error" dengan command `"li\Count,Error"`. 
+
+Setelah itu dimasukkan ke dalam file `.csv` dengan format nama `error_message.csv`
+
+Hasil Output : 
+
+
+
 
 # Soal 2
 Soal ini meminta peserta untuk melkakukan pengolahan data terhadap file yang telah diberikan yakni *Laporan-TokoShiSop.tsv*. Di antara lain adalah mencari **profit percentage terbesar**, mencari **nama customer pada transaksi tahun 2017 di Albuquerque**, dan selainnya.
