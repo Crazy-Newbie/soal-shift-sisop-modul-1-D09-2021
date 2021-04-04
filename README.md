@@ -112,7 +112,7 @@ Setelah itu dimasukkan ke dalam file `.csv` dengan format nama `error_message.cs
 
 Hasil Output : 
 
-
+![alt text](https://github.com/Crazy-Newbie/soal-shift-sisop-modul-1-D09-2021/blob/main/Screenshot/output%201d.jpg)
 
 
 # Soal 2
