@@ -213,5 +213,17 @@ do
 done
 ```
 
-Untuk melakukan download foto tersebut dilakukan looping sebanyak 23 kali dengan `for i in {1..23}` setelah itu mendownload foto tersebut dengan command 
-`wget https://loremflickr.com/320/240/kitten` 
+Download file tersebut dengan menggunakan command `wget` yang setelah itu nama pada file tersebut disesuaikan dengan `-o` dan hasil log dari file tersebut
+dimasukkan ke dalam `Foto.log` dengan menggunakan command `-a`. Setelah itu, menggunakan variabel I dan J untuk cek apakah file tersebut sama atau tidak, jika file tersebut sama
+maka file tersebut akan di remove dengan command `rm`.
+
+File tersebut akan di urutkan dengan variabel I dan J. Jika dari nama file tersebut hilang pada saat di cek, maka file tersebut akan di ganti dengan nama file yang hilang
+seperti misal di Koleksi_03 tidak ada maka di Koleksi_023 akan dihapus dan diganti namanya menjadi Koleksi_03.
+
+Hasil Output : 
+
+![alt text](https://github.com/Crazy-Newbie/soal-shift-sisop-modul-1-D09-2021/blob/main/Screenshot/output%203a.jpg)
+
+
+
+
