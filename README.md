@@ -140,6 +140,11 @@ Hasil Output :
 
 ![alt text](https://github.com/Crazy-Newbie/soal-shift-sisop-modul-1-D09-2021/blob/main/Screenshot/output%201e.jpg)
 
+# Kendala
+Kendala yang dialami saat pengerjaan :
+
+1. Perlu referensi yang banyak untuk mendapatkan command yang tidak ada pada modul
+2. Karena `AWK` tidak bisa digunakan maka dari itu sulit untuk mengerjakannya
 
 
 # Soal 2
@@ -162,3 +167,51 @@ Diawali dengan `body` *block* untuk membaca file khususnya pada kolom jenis *con
 # 2d
 
 Pada `BEGIN` *block* lakukan inisialisasi variabel yang akan digunakan nanti saat `body` *block*. Saat masuk pembacaan file, yakni `body` *block*, lakukan pembacaan terhadap kolom ke-13 `$13` untuk menentukan pada *record* yang sekarang, berada pada region mana. Jika ketemu salah satu region, maka lakukan perhitungan profit, dengan inisialisasi array `<region>[index]=$21` mengingat ko;lom profit berada di kolom ke-21. Perhitungan total pada region tersebut dilakukan dengan perintah `sum<Region>= sum<Region> + <region>[index]` kemudian setelah itu increment indexnya. Setelah pembacaan file selesai, pada `END` *block* lakukan seperti nomor 2c, yakni bandingkan semua region, mana region dengan profit terkecil. Jika ketemu, assign nama region ke `minReg` dan assign total profitnya ke variabel `profit`. Kemudian tampilkan hasilnya.
+
+
+# Soal 3
+Pada soal 3, Kuuhaku mendownload 23 foto kucing atau kelinci dari link yang akan disimpan dalam folder dengan penamaan tertentu lalu di zip dan unzip sesuai waktu yang ditentukan.
+
+
+# 3a
+User diminta untuk mendownload 23 foto kucing dari link https://loremflickr.com/320/240/kitten dengan penamaan file Koleksi_01, Koleksi_02, dst serta menyimpan log fotonya ke file Foto.log. Kemudian jika terdapat foto yang sama, maka foto tersebut akan di hapus dengan tidak perlu mendownload ulang foto lain.
+
+```
+#!/bin/bash
+
+echo "" > Foto.log
+
+for i in {1..23}
+do
+	wget https://loremflickr.com/320/240/kitten -O $( echo "Koleksi_"$i ) -a Foto.log
+done
+
+for ((i=1;i<=23;i++))
+do
+	for((j=i+1;j<=23;j++))
+	do
+		if diff $( echo "Koleksi_"$i) $( echo "Koleksi_"$j ) &> /dev/null
+		then
+			rm $(echo "Koleksi_"$j )
+		fi
+	done
+done
+
+for i in {1..23}
+do
+	if [ ! -f $( printf "Koleksi_"$i  ) ]
+	then
+		for ((j=23; i<j; j-- ))
+		do
+			if [ -f $( echo "Koleksi_"$j ) ]
+			then
+				mv $( echo "Koleksi_"$j  ) $( echo "Koleksi_"$i  )
+				break
+			fi
+		done
+	fi
+done
+```
+
+Untuk melakukan download foto tersebut dilakukan looping sebanyak 23 kali dengan `for i in {1..23}` setelah itu mendownload foto tersebut dengan command 
+`wget https://loremflickr.com/320/240/kitten` 
